@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "50499987628",
+    "firebase_url": "https://scaneat-fbd4a.firebaseio.com",
+    "project_id": "scaneat-fbd4a",
+    "storage_bucket": "scaneat-fbd4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:50499987628:android:12a41d40dbbb7bd7",
+        "android_client_info": {
+          "package_name": "com.example.shangsheingoh.scaneat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "50499987628-uchkc06t9qvjftdknufcbvga164t6v5e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shangsheingoh.scaneat",
+            "certificate_hash": "f5c592123ee62915c4d5c5af41b8ccce755f650a"
+          }
+        },
+        {
+          "client_id": "50499987628-vmqfljv37tbtmss6gqq2vven6t4lrlqh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADTL7dM5NCKImgqASsjv9RrFeK62NhkFU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "50499987628-vmqfljv37tbtmss6gqq2vven6t4lrlqh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
