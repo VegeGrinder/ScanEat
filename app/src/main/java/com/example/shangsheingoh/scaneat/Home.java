@@ -155,11 +155,14 @@ public class Home extends AppCompatActivity
             Intent orderIntent = new Intent(Home.this,OrderStatus.class);
             startActivity(orderIntent);
 
+        } else if (id == R.id.nav_qr_scan) {
+            Intent orderIntent = new Intent(Home.this,QRCodeScan.class);
+            startActivity(orderIntent);
+
         } else if (id == R.id.nav_log_out) {
             Intent signIn = new Intent(Home.this,SignIn.class);
             signIn.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(signIn);
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

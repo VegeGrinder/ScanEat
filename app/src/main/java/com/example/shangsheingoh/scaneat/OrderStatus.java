@@ -1,11 +1,14 @@
 package com.example.shangsheingoh.scaneat;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.shangsheingoh.scaneat.Common.Common;
+import com.example.shangsheingoh.scaneat.Interface.ItemClickListener;
 import com.example.shangsheingoh.scaneat.Model.Request;
 import com.example.shangsheingoh.scaneat.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -57,6 +60,15 @@ public class OrderStatus extends AppCompatActivity {
                 viewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(model.getStatus()));
                 viewHolder.txtOrderAddress.setText(model.getAddress());
                 viewHolder.txtOrderPhone.setText(model.getPhone());
+
+                viewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClick) {
+                        Intent QRcode = new Intent(OrderStatus.this,QRCodeGen.class);
+                        QRcode.putExtra("text",adapter.getRef(position).getKey());
+                        startActivity(QRcode);
+                    }
+                });
             }
         };
         recyclerView.setAdapter(adapter);

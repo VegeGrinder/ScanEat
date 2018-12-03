@@ -39,7 +39,7 @@ public class Cart extends AppCompatActivity {
     FButton btnPlace;
 
     List<Order> cart =  new ArrayList<>();
-
+    int finalItem;
     CartAdapter adapter;
 
     @Override
@@ -71,34 +71,35 @@ public class Cart extends AppCompatActivity {
     private void showAlertDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Cart.this);
         alertDialog.setTitle("One more step!");
-        alertDialog.setMessage("Enter your address");
-
-        final EditText editAddress = new EditText(Cart.this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-        );
-        editAddress.setLayoutParams(lp);
-        alertDialog.setView(editAddress); //add edit text to alert dialog
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
+        String[] animals = {"horse", "cow", "camel", "sheep", "goat"};
+        int checkedItem = 1;
+
+        alertDialog.setSingleChoiceItems(animals, checkedItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finalItem = which;
+            }
+        });
 
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Request request = new Request(
-                        Common.currentUser.getPhone(),
-                        Common.currentUser.getName(),
-                        editAddress.getText().toString(),
-                        txtTotalPrice.getText().toString(),
-                        cart
-                );
 
-                requests.child(String.valueOf(System.currentTimeMillis()))
-                        .setValue(request);
+//
+// Request request = new Request(
+//                        Common.currentUser.getPhone(),
+//                        Common.currentUser.getName(),
+//                        txtTotalPrice.getText().toString(),
+//                        cart
+//                );
 
-                new Database(getBaseContext()).cleanCart();
-                Toast.makeText(Cart.this, "Thank you, Order Placed", Toast.LENGTH_SHORT).show();
-                finish();
+//                requests.child(String.valueOf(System.currentTimeMillis()))
+//                        .setValue(request);
+
+//                new Database(getBaseContext()).cleanCart();
+//                Toast.makeText(Cart.this, "Thank you, Order Placed", Toast.LENGTH_SHORT).show();
+//                finish();
             }
         });
 

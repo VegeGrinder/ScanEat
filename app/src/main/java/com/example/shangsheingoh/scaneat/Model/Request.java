@@ -5,6 +5,7 @@ import java.util.List;
 public class Request {
     private String phone;
     private String name;
+    private String selfPickup;
     private String address;
     private String total;
     private String status;
@@ -13,10 +14,10 @@ public class Request {
     public Request() {
     }
 
-    public Request(String phone, String name, String address, String total, List<Order> foods) {
+    public Request(String phone, String name, String total, List<Order> foods) {
         this.phone = phone;
         this.name = name;
-        this.address = address;
+        this.address = "";
         this.total = total;
         this.foods = foods;
         this.status = "0";

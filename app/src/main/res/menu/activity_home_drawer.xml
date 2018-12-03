@@ -23,6 +23,12 @@
             android:title="Orders" />
 
         <item
+            android:id="@+id/nav_qr_scan"
+            android:icon="@drawable/ic_settings_overscan_black_24dp"
+            android:iconTint="@android:color/white"
+            android:title="QR Scan" />
+
+        <item
             android:id="@+id/nav_log_out"
             android:icon="@drawable/ic_exit_to_app_black_24dp"
             android:iconTint="@android:color/white"

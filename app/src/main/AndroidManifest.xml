@@ -27,7 +27,9 @@
         <activity android:name=".FoodList" />
         <activity android:name=".FoodDetail" />
         <activity android:name=".Cart" />
-        <activity android:name=".OrderStatus"></activity>
+        <activity android:name=".OrderStatus" />
+        <activity android:name=".QRCodeGen" />
+        <activity android:name=".QRCodeScan"></activity>
     </application>
 
 </manifest>

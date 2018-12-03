@@ -40,7 +40,7 @@
 
                 <TextView
                     android:id="@+id/total"
-                    android:text="RM10"
+                    android:text="RM0"
                     android:textSize="24sp"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
