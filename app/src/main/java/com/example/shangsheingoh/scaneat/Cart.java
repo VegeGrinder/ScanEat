@@ -1,6 +1,7 @@
 package com.example.shangsheingoh.scaneat;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,7 +49,8 @@ public class Cart extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         database = FirebaseDatabase.getInstance();
-        requests=database.getReference("Requests");
+        requests=database.getReference("Reque" +
+                "sts");
 
         recyclerView = (RecyclerView)findViewById(R.id.listCart);
         recyclerView.setHasFixedSize(true);
@@ -72,8 +74,8 @@ public class Cart extends AppCompatActivity {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Cart.this);
         alertDialog.setTitle("One more step!");
         alertDialog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
-        String[] animals = {"horse", "cow", "camel", "sheep", "goat"};
-        int checkedItem = 1;
+        String[] animals = {"Self-pickup and help others", "Cannot pickup, need help", "Self-pickup only"};
+        int checkedItem = 0;
 
         alertDialog.setSingleChoiceItems(animals, checkedItem, new DialogInterface.OnClickListener() {
             @Override
@@ -86,20 +88,31 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-//
-// Request request = new Request(
-//                        Common.currentUser.getPhone(),
-//                        Common.currentUser.getName(),
-//                        txtTotalPrice.getText().toString(),
-//                        cart
-//                );
+                Request request = new Request(
+                        Common.currentUser.getPhone(),
+                        Common.currentUser.getName(),
+                        txtTotalPrice.getText().toString(),
+                        cart
+                );
 
-//                requests.child(String.valueOf(System.currentTimeMillis()))
-//                        .setValue(request);
+                if(finalItem==0){
+                    Intent intent = new Intent(Cart.this,TimePicker.class);
+                    intent.putExtra("Request",txtTotalPrice.getText().toString());
+                    startActivity(intent);
+                }
+                else if(finalItem==1){
+                    Intent intent = new Intent(Cart.this,DeliveryActivity.class);
+                    intent.putExtra("Request",txtTotalPrice.getText().toString());
+                    startActivity(intent);
+                }
+                else if(finalItem==2){
+                    requests.child(String.valueOf(System.currentTimeMillis()))
+                            .setValue(request);
+                    new Database(getBaseContext()).cleanCart();
+                    Toast.makeText(Cart.this, "Thank you, Order Placed", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
 
-//                new Database(getBaseContext()).cleanCart();
-//                Toast.makeText(Cart.this, "Thank you, Order Placed", Toast.LENGTH_SHORT).show();
-//                finish();
             }
         });
 
@@ -126,4 +139,6 @@ public class Cart extends AppCompatActivity {
             txtTotalPrice.setText(fmt.format(total));
         }
     }
+
+
 }

@@ -17,10 +17,19 @@ public class Request {
     public Request(String phone, String name, String total, List<Order> foods) {
         this.phone = phone;
         this.name = name;
+        this.selfPickup = "true";
         this.address = "";
         this.total = total;
         this.foods = foods;
         this.status = "0";
+    }
+
+    public String getSelfPickup() {
+        return selfPickup;
+    }
+
+    public void setSelfPickup(String selfPickup) {
+        this.selfPickup = selfPickup;
     }
 
     public String getStatus() {

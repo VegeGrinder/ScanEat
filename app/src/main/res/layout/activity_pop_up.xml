@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sdfsad"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PopUp">
+
+    <Button
+        android:id="@+id/confirmButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="106dp"
+        android:text="Confirm"
+        app:layout_constraintEnd_toStartOf="@+id/cancelButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/poptextViewRating" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="81dp"
+        android:layout_marginEnd="57dp"
+        android:text="Return"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/poptextViewShortDesc" />
+
+    <TextView
+        android:id="@+id/poptextViewTitle"
+        android:layout_width="265dp"
+        android:layout_height="65dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginEnd="60dp"
+        android:layout_toRightOf="@id/imageView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="20pt"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/poptextViewShortDesc"
+        android:layout_width="256dp"
+        android:layout_height="65dp"
+        android:layout_below="@id/poptextViewTitle"
+        android:layout_marginStart="82dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="76dp"
+        android:layout_toRightOf="@id/imageView"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/poptextViewRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/poptextViewShortDesc"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="266dp"
+        android:layout_toRightOf="@id/imageView"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small.Inverse"
+        android:textSize="12pt"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/poptextViewShortDesc" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="229dp"
+        android:text="Deliver Time:"
+        android:textSize="8pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textColor="@android:color/black" />
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="307dp"
+        android:text="By:"
+        android:textSize="8pt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/poptextViewTitle"
+        tools:textColor="@android:color/black" />
+
+</android.support.constraint.ConstraintLayout>
