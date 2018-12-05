@@ -179,7 +179,7 @@ public class Home extends AppCompatActivity
         }
         else if (id == R.id.nav_log_out) {
             firebaseAuth.signOut();
-            Intent signIn = new Intent(Home.this,SignIn.class);
+            Intent signIn = new Intent(Home.this,login.class);
             startActivity(signIn);
             finish();
         }
