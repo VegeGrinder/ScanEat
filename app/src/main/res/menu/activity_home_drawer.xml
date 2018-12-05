@@ -5,10 +5,14 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_menu"
-            android:icon="@drawable/ic_restaurant_black_24dp"
+            android:id="@+id/user_profile"
             android:iconTint="@android:color/white"
-            android:title="Menu" />
+            android:title="Profile" />
+
+        <item
+            android:id="@+id/announcement"
+            android:iconTint="@android:color/white"
+            android:title="Announcement" />
 
         <item
             android:id="@+id/nav_cart"
@@ -27,6 +31,16 @@
             android:icon="@drawable/ic_settings_overscan_black_24dp"
             android:iconTint="@android:color/white"
             android:title="QR Scan" />
+
+        <item
+            android:id="@+id/nav_map_act"
+            android:iconTint="@android:color/white"
+            android:title="Deliver Map" />
+
+        <item
+            android:id="@+id/nav_accept_request"
+            android:iconTint="@android:color/white"
+            android:title="Deliver Request" />
 
         <item
             android:id="@+id/nav_log_out"

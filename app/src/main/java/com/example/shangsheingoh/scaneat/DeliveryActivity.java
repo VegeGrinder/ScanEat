@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.shangsheingoh.scaneat.Model.LocationDetails;
 import com.google.firebase.database.DataSnapshot;
@@ -46,12 +47,12 @@ public class DeliveryActivity extends AppCompatActivity {
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.child("delivery").child("timeSlot").child("slotList").getChildren()) {
                     LocationDetails user = dataSnapshot1.getValue(LocationDetails.class);
                     String abc = user.getPickUpTime();
-                    String def = user.getUser();
+                    String def = user.getUserName();
                     String ghi = user.getSlotID();
                     slotList.add(new LocationDetails(def,abc,ghi));
                 }
                 adapter.notifyDataSetChanged();
-                // Log.d("pukimamamama",slotList.toString());
+                 Log.d("pukimamamama",slotList.get(0).getPickUpTime());
                 //      ArrayList<String> timeslotList = new ArrayList<String>();
                 //      for (DataSnapshot timeslotSnapshot : dataSnapshot.child("slot list").getChildren()){
                 //          timeslotList.add(timeslotSnapshot.getValue().toString());

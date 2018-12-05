@@ -36,7 +36,7 @@ public class Cart extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference requests;
 
-    TextView txtTotalPrice;
+    public TextView txtTotalPrice;
     FButton btnPlace;
 
     List<Order> cart =  new ArrayList<>();
@@ -89,8 +89,8 @@ public class Cart extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Request request = new Request(
-                        Common.currentUser.getPhone(),
-                        Common.currentUser.getName(),
+                        Common.currentUser.getUserPhone(),
+                        Common.currentUser.getUserName(),
                         txtTotalPrice.getText().toString(),
                         cart
                 );

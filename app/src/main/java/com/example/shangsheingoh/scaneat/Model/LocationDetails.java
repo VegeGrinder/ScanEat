@@ -2,7 +2,7 @@ package com.example.shangsheingoh.scaneat.Model;
 
 public class LocationDetails {
     //  private int id;
-    private String user;
+    private String userName;
     private String pickUpTime;
     private String slotID;
     //   private double rating;
@@ -12,20 +12,18 @@ public class LocationDetails {
     public LocationDetails() {
     }
 
-    public LocationDetails(/*int id,*/ String user, String pickUpTime ,String slotID/*, double rating, double price*/) {
+    public LocationDetails(/*int id,*/ String username, String pickUpTime ,String slotID/*, double rating, double price*/) {
         //  this.id = id;
-        this.user = user;
+        this.userName = username;
         this.pickUpTime = pickUpTime;
         this.slotID = slotID;
         //   this.rating = rating;
         //   this.price = price;
     }
 
-
-    public String getUser() {
-        return user;
+    public String getUserName() {
+        return userName;
     }
-
 
     public String getPickUpTime() {
         return pickUpTime;

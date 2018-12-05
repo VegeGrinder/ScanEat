@@ -1,9 +1,10 @@
 package com.example.shangsheingoh.scaneat.Common;
 
 import com.example.shangsheingoh.scaneat.Model.User;
+import com.example.shangsheingoh.scaneat.Model.UserProfile;
 
 public class Common {
-    public static User currentUser;
+    public static UserProfile currentUser;
 
     public static String convertCodeToStatus(String status) {
         if(status.equals("0")){

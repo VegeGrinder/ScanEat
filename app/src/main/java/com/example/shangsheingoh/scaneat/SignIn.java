@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.shangsheingoh.scaneat.Common.Common;
+import com.example.shangsheingoh.scaneat.Common.Common1;
 import com.example.shangsheingoh.scaneat.Model.User;
+import com.example.shangsheingoh.scaneat.Model.UserProfile;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,7 +57,7 @@ public class SignIn extends AppCompatActivity {
                             if(user.getPassword().equals(editPassword.getText().toString())){
 
                                 Intent homeIntent = new Intent(SignIn.this, Home.class);
-                                Common.currentUser = user;
+                                Common1.currentUser = user;
                                 startActivity(homeIntent);
                                 finish();
 

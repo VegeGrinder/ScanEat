@@ -85,6 +85,8 @@ public class TimePicker extends AppCompatActivity {
                     DatabaseReference dbAddTimeSlot = FirebaseDatabase.getInstance().getReference();
                     DatabaseReference dbAddTime = dbAddTimeSlot.child("delivery").child("timeSlot").child("slotList").child("slot_" + slotCounter).child("pickUpTime");
                     DatabaseReference dbAddSlotID = dbAddTimeSlot.child("delivery").child("timeSlot").child("slotList").child("slot_" + slotCounter).child("slotID");
+                    DatabaseReference dbAddUserID = dbAddTimeSlot.child("delivery").child("timeSlot").child("slotList").child("slot_" + slotCounter).child("userID");
+                    DatabaseReference dbAddUserName = dbAddTimeSlot.child("delivery").child("timeSlot").child("slotList").child("slot_" + slotCounter).child("userName");
                     dbAddSlotID.setValue("slot_" + slotCounter);
                     dbAddTime.setValue(String.valueOf(hour) + String.valueOf(minute) + "-" + String.valueOf(hourMax) + String.valueOf(minute));
                     slotCounter++;
@@ -94,11 +96,15 @@ public class TimePicker extends AppCompatActivity {
                     finish();
 
                     Request request = new Request(
-                            Common.currentUser.getPhone(),
-                            Common.currentUser.getName(),
+                            Common.currentUser.getUserPhone(),
+                            Common.currentUser.getUserName(),
                             totalPrice,
                             cart
                     );
+                    String userid = request.getPhone();
+                    String username = request.getName();
+                    dbAddUserID.setValue(userid);
+                    dbAddUserName.setValue(username);
                     DatabaseReference dbAddRequest = FirebaseDatabase.getInstance().getReference("Request");
                     dbAddRequest.child(String.valueOf(System.currentTimeMillis()))
                             .setValue(request);

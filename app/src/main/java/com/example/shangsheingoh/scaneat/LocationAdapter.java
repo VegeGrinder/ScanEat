@@ -48,7 +48,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
 
         //binding the data with the viewholder views
         holder.textViewTitle.setText(location.getPickUpTime());
-        holder.textViewShortDesc.setText(location.getUser());
+        holder.textViewShortDesc.setText(location.getUserName());
         holder.textViewRating.setText(String.valueOf(location.getSlotID()));
 
         //  holder.textViewPrice.setText(String.valueOf(location.getPrice()));

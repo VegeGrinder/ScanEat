@@ -39,7 +39,7 @@ public class OrderStatus extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
 //        if(getIntent()==null){
-            loadOrders(Common.currentUser.getPhone());
+            loadOrders(Common.currentUser.getUserPhone());
 //        }
 //        else{
 //            loadOrders(getIntent().getStringExtra("userPhone"));
