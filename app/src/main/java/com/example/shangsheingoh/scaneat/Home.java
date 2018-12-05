@@ -49,7 +49,7 @@ public class Home extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        firebaseAuth=FirebaseAuth.getInstance();
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -178,9 +178,10 @@ public class Home extends AppCompatActivity
             startActivity(manageRequest);
         }
         else if (id == R.id.nav_log_out) {
-            Intent signIn = new Intent(Home.this,SignIn.class);
             firebaseAuth.signOut();
+            Intent signIn = new Intent(Home.this,SignIn.class);
             startActivity(signIn);
+            finish();
         }
 
 
