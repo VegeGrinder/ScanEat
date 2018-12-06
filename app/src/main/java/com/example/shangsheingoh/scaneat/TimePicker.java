@@ -13,6 +13,7 @@ import com.example.shangsheingoh.scaneat.Common.Common;
 import com.example.shangsheingoh.scaneat.Database.Database;
 import com.example.shangsheingoh.scaneat.Model.Order;
 import com.example.shangsheingoh.scaneat.Model.Request;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,7 @@ public class TimePicker extends AppCompatActivity {
     int hour, minute;
 
     int slotCounter;
+    FirebaseAuth authUser;
 
     String totalPrice;
     List<Order> cart =  new ArrayList<>();
@@ -48,6 +50,7 @@ public class TimePicker extends AppCompatActivity {
 
         Intent getIntent = getIntent();
         totalPrice = getIntent.getStringExtra("Request");
+        authUser = FirebaseAuth.getInstance();
 
         DatabaseReference currentLocationCounter = FirebaseDatabase.getInstance().getReference().child("delivery").child("timeSlot");
         currentLocationCounter.addValueEventListener(new ValueEventListener() {
@@ -96,7 +99,7 @@ public class TimePicker extends AppCompatActivity {
                     finish();
 
                     Request request = new Request(
-                            Common.currentUser.getUserPhone(),
+                            authUser.getUid(),
                             Common.currentUser.getUserName(),
                             totalPrice,
                             cart

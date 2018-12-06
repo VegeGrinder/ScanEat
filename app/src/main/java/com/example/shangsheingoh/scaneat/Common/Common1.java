@@ -12,10 +12,13 @@ public class Common1 {
             return "Placed";
         }
         else if(status.equals("1")){
-            return "On my way";
+            return "Ready";
+        }
+        else if(status.equals("2")){
+            return "Shipped";
         }
         else{
-            return "Shipped";
+            return "Finished";
         }
     }
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.example.shangsheingoh.scaneat.Common.Common;
 import com.example.shangsheingoh.scaneat.Model.TemporaryDetails;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class AcceptActivity extends AppCompatActivity {
 
-    String userIDD = Common.currentUser.getUserPhone();
+    FirebaseAuth authUser;
 
     //a list to store all the products
     List<TemporaryDetails> acceptList= new ArrayList<>();
@@ -41,7 +42,7 @@ public class AcceptActivity extends AppCompatActivity {
         recyclerView1 = (RecyclerView) findViewById(R.id.recyclerView1);
         recyclerView1.setHasFixedSize(true);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
-
+        authUser = FirebaseAuth.getInstance();
         final AcceptAdapter adapter1 = new AcceptAdapter(this, acceptList);
 
         DatabaseReference acceptSlot = FirebaseDatabase.getInstance().getReference("delivery").child("timeSlot").child("slotList");
@@ -49,7 +50,7 @@ public class AcceptActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()){
-                    if (dataSnapshot2.child("userID").getValue().toString().equals(userIDD)) {
+                    if (dataSnapshot2.child("userID").getValue().toString().equals(authUser.getUid())) {
                         //    String slotIden = dataSnapshot2.child("slotID").toString();
                         for (DataSnapshot hohoho : dataSnapshot2.child("temporaryList").getChildren()) {
                             TemporaryDetails accept = hohoho.getValue(TemporaryDetails.class);

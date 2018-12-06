@@ -1,6 +1,8 @@
 package com.example.shangsheingoh.scaneat;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,10 +15,13 @@ import com.example.shangsheingoh.scaneat.Model.Request;
 import com.example.shangsheingoh.scaneat.ViewHolder.OrderViewHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class OrderStatus extends AppCompatActivity {
+public class OrderHelp extends AppCompatActivity {
 
     public RecyclerView recyclerView;
     public RecyclerView.LayoutManager layoutManager;
@@ -30,19 +35,34 @@ public class OrderStatus extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_status);
+        setContentView(R.layout.activity_order_help);
 
         database = FirebaseDatabase.getInstance();
-        requests = database.getReference("Requests");
+        requests = database.getReference("delivery").child("timeSlot").child("slotList");
         firebaseAuth=FirebaseAuth.getInstance();
 
-        recyclerView = (RecyclerView)findViewById(R.id.listOrders);
+        recyclerView = (RecyclerView)findViewById(R.id.listHelps);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
 //        if(getIntent()==null){
-            loadOrders(firebaseAuth.getUid());
+        requests.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot i:dataSnapshot.getChildren()){
+                    if(i.child("userID").equals(firebaseAuth.getUid())){
+                        loadOrders(i.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 //        }
 //        else{
 //            loadOrders(getIntent().getStringExtra("userPhone"));
@@ -67,9 +87,9 @@ public class OrderStatus extends AppCompatActivity {
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Intent QRcode = new Intent(OrderStatus.this,QRCodeGen.class);
-                        QRcode.putExtra("text",adapter.getRef(position).getKey());
-                        startActivity(QRcode);
+                 //       Intent QRcode = new Intent(OrderStatus.this,QRCodeGen.class);
+                 //       QRcode.putExtra("text",adapter.getRef(position).getKey());
+                  //      startActivity(QRcode);
                     }
                 });
             }

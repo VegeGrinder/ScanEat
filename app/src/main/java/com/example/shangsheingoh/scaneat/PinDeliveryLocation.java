@@ -6,17 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.example.shangsheingoh.scaneat.Common.Common;
-import com.example.shangsheingoh.scaneat.Model.Request;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -24,6 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -39,6 +37,7 @@ public class PinDeliveryLocation extends FragmentActivity implements OnMapReadyC
     double longitude ;
     boolean onButton = false ;
     String addressLine = null;
+    FirebaseAuth firebaseAuth;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -50,7 +49,7 @@ public class PinDeliveryLocation extends FragmentActivity implements OnMapReadyC
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
+        firebaseAuth=FirebaseAuth.getInstance();
         String userID = null;
         String pickupTime = null;
         String slotID = null;
@@ -70,7 +69,7 @@ public class PinDeliveryLocation extends FragmentActivity implements OnMapReadyC
         final String finalslotID = slotID;
 
         final String requesterName = Common.currentUser.getUserName();
-        final String requesterID = Common.currentUser.getUserPhone();
+        final String requesterID = firebaseAuth.getUid();
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton2);
 
         floatingActionButton.setVisibility(View.GONE);
@@ -99,11 +98,17 @@ public class PinDeliveryLocation extends FragmentActivity implements OnMapReadyC
                                 DatabaseReference addtemporaryLocationLong = temporaryLocation.child("temporaryList").child(requesterID).child("longitude");
                                 DatabaseReference addtemporaryUserID = temporaryLocation.child("temporaryList").child(requesterID).child("tempUserID");
                                 DatabaseReference addtemporaryUserName =  temporaryLocation.child("temporaryList").child(requesterID).child("tempUserName");
+                                DatabaseReference addtemporaryUserPrice = temporaryLocation.child("temporaryList").child(requesterID).child("tempUserPrice");
+                                DatabaseReference addtemporaryRequest = temporaryLocation.child("temporaryList").child(requesterID);
 
                                 addtemporaryLocationLat.setValue(latitude);
                                 addtemporaryLocationLong.setValue(longitude);
                                 addtemporaryUserID.setValue(requesterID);
                                 addtemporaryUserName.setValue(requesterName);
+                                addtemporaryRequest.child(String.valueOf(System.currentTimeMillis()))
+                                        .setValue(Common.currentRequest);
+                                addtemporaryRequest.child("orderId").setValue(String.valueOf(System.currentTimeMillis()));
+
                                 finish();
                             }
                         })

@@ -63,13 +63,7 @@ public class login extends AppCompatActivity {
             }
         });
 
-//        b1.setOnClickListener(new View.OnClickListener() {
-//           @Override
-//            public void onClick(View v) {
-//                Intent intent= new Intent(MainActivity.this,register.class);
-//              startActivity(intent);
-//           }
-//       });
+
     }
 
 

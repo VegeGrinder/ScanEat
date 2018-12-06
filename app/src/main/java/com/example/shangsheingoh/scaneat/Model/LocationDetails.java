@@ -21,6 +21,7 @@ public class LocationDetails {
         //   this.price = price;
     }
 
+
     public String getUserName() {
         return userName;
     }

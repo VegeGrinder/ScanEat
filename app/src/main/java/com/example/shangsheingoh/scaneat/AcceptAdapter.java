@@ -151,24 +151,41 @@ public class AcceptAdapter extends RecyclerView.Adapter<AcceptAdapter.LocationVi
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // continue with delete
-                                    DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                                    DatabaseReference addDBlatitude = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("deliverList").child("Location_" + locationCounter + "").child("latitude");
-                                    DatabaseReference addDBlongitude = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("deliverList").child("Location_" + locationCounter + "").child("longitude");
-                                    DatabaseReference addDBrequesterName = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("deliverList").child("Location_" + locationCounter + "").child("requesterName");
-                                    DatabaseReference addDBrequesterID = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("deliverList").child("Location_" + locationCounter + "").child("requesterID");
+                                    final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+//                                    DatabaseReference addDBlatitude = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("deliverList").child(requesterID).child("latitude");
+//                                    DatabaseReference addDBlongitude = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("deliverList").child(requesterID).child("longitude");
+//                                    DatabaseReference addDBrequesterName = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("deliverList").child(requesterID).child("requesterName");
+//                                    DatabaseReference addDBrequesterID = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("deliverList").child(requesterID).child("requesterID");
 
-                                    addDBlatitude.setValue(finallatitude);
-                                    addDBlongitude.setValue(finallongitude);
-                                    addDBrequesterName.setValue(requesterName);
-                                    addDBrequesterID.setValue(requesterID);
+//                                    addDBlatitude.setValue(finallatitude);
+//                                    addDBlongitude.setValue(finallongitude);
+//                                    addDBrequesterName.setValue(requesterName);
+//                                    addDBrequesterID.setValue(requesterID);
 
+                                    DatabaseReference getTemp = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("temporaryList");
+                                    final DatabaseReference putDeliver = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("deliverList").child(requesterID);
+                                    getTemp.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for(DataSnapshot i:dataSnapshot.getChildren()){
+                                                if(i.getKey().equals(requesterID)){
+                                                    putDeliver.setValue(i.getValue());
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                        }
+                                    });
                                     // RMB TO DELETE TEMPORARY LIST
 
                                     DatabaseReference dbcurrentLocationCount = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("locationCount");
                                     locationCounter++;
                                     dbcurrentLocationCount.setValue(locationCounter);
 
-                                    DatabaseReference deleteTempRequest = databaseReference.child("delivery").child("slotList").child(slotID).child("temporaryList").child(requesterID);
+                                    DatabaseReference deleteTempRequest = databaseReference.child("delivery").child("timeSlot").child("slotList").child(slotID).child("temporaryList").child(requesterID);
                                     deleteTempRequest.removeValue();
                                 }
                             })

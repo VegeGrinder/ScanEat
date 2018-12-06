@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +16,7 @@ import com.example.shangsheingoh.scaneat.Database.Database;
 import com.example.shangsheingoh.scaneat.Model.Order;
 import com.example.shangsheingoh.scaneat.Model.Request;
 import com.example.shangsheingoh.scaneat.ViewHolder.CartAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -37,11 +36,12 @@ public class Cart extends AppCompatActivity {
     DatabaseReference requests;
 
     public TextView txtTotalPrice;
-    FButton btnPlace;
+    FButton btnPlace,btnReset;
 
     List<Order> cart =  new ArrayList<>();
     int finalItem;
     CartAdapter adapter;
+    private FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class Cart extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         requests=database.getReference("Reque" +
                 "sts");
-
+        firebaseAuth=FirebaseAuth.getInstance();
         recyclerView = (RecyclerView)findViewById(R.id.listCart);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
@@ -59,6 +59,10 @@ public class Cart extends AppCompatActivity {
 
         txtTotalPrice = (TextView)findViewById(R.id.total);
         btnPlace = (FButton)findViewById(R.id.btnPlaceOrder);
+        btnReset = (FButton)findViewById(R.id.btnReset);
+
+
+        loadListFood();
 
         btnPlace.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +71,15 @@ public class Cart extends AppCompatActivity {
             }
         });
 
-        loadListFood();
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Database(getBaseContext()).cleanCart();
+                adapter.notifyDataSetChanged();
+                finish();
+            }
+        });
+
     }
 
     private void showAlertDialog() {
@@ -89,20 +101,19 @@ public class Cart extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Request request = new Request(
-                        Common.currentUser.getUserPhone(),
+                        firebaseAuth.getUid(),
                         Common.currentUser.getUserName(),
                         txtTotalPrice.getText().toString(),
                         cart
                 );
+                Common.currentRequest = request;
 
                 if(finalItem==0){
                     Intent intent = new Intent(Cart.this,TimePicker.class);
-                    intent.putExtra("Request",txtTotalPrice.getText().toString());
                     startActivity(intent);
                 }
                 else if(finalItem==1){
                     Intent intent = new Intent(Cart.this,DeliveryActivity.class);
-                    intent.putExtra("Request",txtTotalPrice.getText().toString());
                     startActivity(intent);
                 }
                 else if(finalItem==2){
@@ -139,6 +150,5 @@ public class Cart extends AppCompatActivity {
             txtTotalPrice.setText(fmt.format(total));
         }
     }
-
 
 }

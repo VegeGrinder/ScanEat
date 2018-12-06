@@ -49,7 +49,9 @@
         <activity android:name=".Announcement" />
         <activity android:name=".login" />
         <activity android:name=".Profile_activity" />
-        <activity android:name=".update_profile"></activity>
+        <activity android:name=".update_profile" />
+        <activity android:name=".OrderHelp" />
+        <activity android:name=".TrackActivity"></activity>
     </application>
 
 </manifest>

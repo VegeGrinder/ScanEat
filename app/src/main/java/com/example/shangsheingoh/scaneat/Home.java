@@ -177,6 +177,10 @@ public class Home extends AppCompatActivity
             Intent manageRequest = new Intent (Home.this, AcceptActivity.class);
             startActivity(manageRequest);
         }
+        else if (id ==R.id.nav_track_request){
+            Intent manageRequest = new Intent (Home.this, TrackActivity.class);
+            startActivity(manageRequest);
+        }
         else if (id == R.id.nav_log_out) {
             firebaseAuth.signOut();
             Intent signIn = new Intent(Home.this,login.class);

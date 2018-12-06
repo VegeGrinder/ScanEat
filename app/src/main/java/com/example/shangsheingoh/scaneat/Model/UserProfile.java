@@ -10,6 +10,7 @@ public class UserProfile {
     public  String userEmail;
     public  String userIc;
     public  String userPhone;
+    
 
     public UserProfile(){
 
@@ -19,7 +20,8 @@ public class UserProfile {
         this.userName = userName;
         this.userEmail = userEmail;
         this.userIc = userIc;
-        this.userPhone= userPhone;
+        this.userPhone = userPhone;
+
     }
 
     public String getUserName() {
