@@ -69,29 +69,30 @@ public class QRCodeScan extends AppCompatActivity implements View.OnClickListene
 //                try {
                 //converting the data to json
                 orderNumber = result.getContents();
+
                 helper.child("slot_1").child("deliverList").child("oQW3qoO9Treli6uWMk5dKqTkmXu2").child("1544049830950").child("status").setValue("3");
-                helper.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        for(DataSnapshot slot:dataSnapshot.getChildren()){
-                            for(DataSnapshot location:dataSnapshot.child("deliverList").getChildren()){
-                                for(DataSnapshot lapsap:dataSnapshot.getChildren()){
-                                    if(lapsap.equals(orderNumber)){
-                                        helper.child(slot.toString()).child(location.toString()).child(lapsap.toString()).child("status").setValue("3");
-
-                                        requests.setValue(lapsap);
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+//                helper.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                        for(DataSnapshot slot:dataSnapshot.getChildren()){
+//                            for(DataSnapshot location:dataSnapshot.child("deliverList").getChildren()){
+//                                for(DataSnapshot lapsap:dataSnapshot.getChildren()){
+//                                    if(lapsap.equals(orderNumber)){
+//                                        helper.child(slot.toString()).child(location.toString()).child(lapsap.toString()).child("status").setValue("3");
+//
+//                                        requests.setValue(lapsap);
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
 
 
 //                    JSONObject obj = new JSONObject(result.getContents());

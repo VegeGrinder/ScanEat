@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static com.example.shangsheingoh.scaneat.Common.Common1.convertCodeToStatus;
+
 public class TrackActivity extends AppCompatActivity {
 
     public RecyclerView recyclerView;
@@ -60,7 +62,7 @@ public class TrackActivity extends AppCompatActivity {
                 String aaa = dataSnapshot.child("status").getValue().toString();
                 String def = dataSnapshot.child("phone").getValue().toString();
 
-                track_status.setText(aaa);
+                track_status.setText(convertCodeToStatus(aaa));
                 track_phone.setText(def);}
             }
 
